@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+{% if 'manager' in user.groups.all.0.name or user.is_staff %}
+    <h3>Редагування</h3>
+        <div class="form-horizontal">
+            <form style="margin-top: 30px" name="categoryForm" id="categoryForm" novalidate action="" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <div class="row">
+                    <div class="col-md-2">
+                        <h4>Назва</h4>
+                    </div>
+                        <div class="col-md-6">
+                            <input class="form-control" name="title" type="text" id="title" value={{ category.title }}>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-2"><h4>Category_order</h4></div>
+                    <div class="col-md-6">
+                        <input class="form-control" type="number"  name="category_order" id="category_order" value={{ category.category_order }}>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="checkbox" id="is_visible" name="is_visible" {% if category.is_visible %} checked {% endif %}>
+                        <label for="is_visible">is_visible</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="checkbox" id="is_special" name="is_special" {% if category.is_special %} checked {% endif %}>
+                        <label for="is_special">is_special</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-custom btn-lg">Done</button>
+            </form>
+        </div>
+    </div>
+    {% else %}
+        <h1 align="center">You do not have access to this page</h1>
+    {% endif %}
+{% endblock %}

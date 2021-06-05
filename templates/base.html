@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+
+    <title>Gusto</title>
+  </head>
+  <body>
+   <nav class="navbar navbar-expand-lg navbar-white bg-warning">
+      <div class="container-justify">
+        <a class="navbar-brand" href="/">GUSTO</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link"  href="/#special_menu">Special menu</a>
+            </li>
+              <li class="nav-item">
+              <a class="nav-link"  href="/#menu">Menu</a>
+            </li>
+              <li class="nav-item">
+              <a class="nav-link"  href="/#events">News</a>
+            </li>
+              {% if 'manager' in user.groups.all.0.name or user.is_staff %}
+              <li class="nav-item">
+              <a class="nav-link"  href="/menu/categories">Categories</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  href="/menu/dishes">Dishes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  href="/user_messeges/view">User messeges</a>
+            </li>
+
+              {% endif %}
+          {% if not user.is_authenticated %}
+              <li style="position: absolute; right: 100px" class="nav-item">
+              <a  class="nav-link"  href="/register">Register</a>
+            </li>
+              <li style="position: absolute; right: 25px" class="nav-item">
+              <a class="nav-link"  href="/login">Log in</a>
+            </li>
+              {% else %}
+              <li style="position: absolute; right: 25px" class="nav-item">
+              <a class="nav-link"  href="/logout">Log out</a>
+            </li>
+          {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+  {% block content %}
+   {%  endblock %}
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+  </body>
+</html>

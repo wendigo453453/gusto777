@@ -1,0 +1,34 @@
+{%  extends 'base.html' %}
+{% block content %}
+    {% if 'manager' in user.groups.all.0.name or user.is_staff %}
+    <div class="container">
+    <div style="margin-bottom: 50px" class="row"><h3 class="col-md-9">Dishes   </h3><a href="/menu/create_dish/" class="col-md-2 btn btn-primary">Create a new dish</a></div>
+
+        <div class="row">
+                <div  class="row">
+                    <div class="col-md-3"><h5>Name</h5></div>
+                    <div class="col-md-2"><h5>Category</h5></div>
+                    <div class="col-md-3"><h5>Description</h5></div>
+                    <div class="col-md-1"><h5>Is visible</h5></div>
+                    <div class="col-md-1"><h5>Price</h5></div>
+                </div>
+
+            {% for category in categories %}
+                {% for dish in category.dishes %}
+                <div class="row">
+                    <div class="col-md-3">{{ dish.title }}</div>
+                    <div class="col-md-2">{{ category.title }}</div>
+                    <div class="col-md-3">{{ dish.description }}</div>
+                    <div class="col-md-1"><p>{% if dish.is_visible %}true{% else %}false{% endif %}</p></div>
+                    <div class="col-md-1">{{ dish.price }} $</div>
+                    <div class="col-md-1"><a class="btn btn-warning" href="/menu/edit_dish/{{ dish.id }}">Edit</a></div>
+                    <div margin class="col-md-1"><a class="btn btn-danger" href="/menu/delete_dish/{{ dish.id }}">Remove</a></div>
+                </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+     {% else %}
+        <h1 align="center">You do not have access to this page</h1>
+    {% endif %}
+{% endblock %}

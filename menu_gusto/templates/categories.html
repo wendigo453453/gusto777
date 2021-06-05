@@ -1,0 +1,30 @@
+{%  extends 'base.html' %}
+{% block content %}
+    {% if 'manager' in user.groups.all.0.name or user.is_staff %}
+    <div class="container">
+    <div style="margin: 50px 0" class="row"><h3 class="col-md-10">Categories   </h3><a href="/menu/create_category" class="col-md-2 btn btn-primary">Create a new category</a></div>
+
+        <div class="row">
+                <div  class="row">
+                    <div class="col-md-4"><h5>Name</h5></div>
+                    <div class="col-md-2"><h5>Category Order</h5></div>
+                    <div class="col-md-2"><h5>Is visible</h5></div>
+                    <div class="col-md-2"><h5>Is special</h5></div>
+                </div>
+            {% for item in categories %}
+
+                <div class="row">
+                    <div class="col-md-4">{{ item.title }}</div>
+                    <div class="col-md-2">{{ item.category_order }}</div>
+                    <div class="col-md-2"><p>{% if item.is_visible %}yes{% else %}no{% endif %}</p></div>
+                    <div class="col-md-2"><p>{% if item.is_special %}yes{% else %}no{% endif %}</p></div>
+                    <div class="col-md-1"><a class="btn btn-warning" href="/menu/edit_category/{{ item.id }}">Edit</a></div>
+                    <div margin class="col-md-1"><a class="btn btn-danger" href="/menu/delete_category/{{ item.id }}">Remove</a></div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+     {% else %}
+        <h1 align="center">You do not have access to this page</h1>
+    {% endif %}
+{% endblock %}

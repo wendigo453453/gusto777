@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+{% if 'manager' in user.groups.all.0.name or user.is_staff %}
+    <h3>Редагування</h3>
+        <div class="form-horizontal">
+            <form style="margin-top: 30px" name="dishForm" id="dishForm" enctype="multipart/form-data" novalidate action="" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <div class="row">
+                    <div class="col-md-2">
+                        <h4>Name</h4>
+                    </div>
+                        <div class="col-md-6">
+                            <input class="form-control" name="title" type="text" id="title" value={{ dish.title }}>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-2"><h4>Category</h4></div>
+                    <div class="col-md-6">
+                        <select class="form-select" name="category">
+                            {% for i in categories %}
+                            <option value={{ i.id }}>{{ i.title }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                <div class="col-md-2">
+                        <h4>Is visible</h4>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="checkbox" name="is_visible" class="form-check-input" id="is_visible" {% if dish.is_visible %} checked {% endif %}>
+                        <label for="is_visible">is_visible</label>
+                    </div>
+                </div>
+                 <div class="row">
+                    <div class="col-md-2">
+                        <h4>Опис</h4>
+                    </div>
+                        <div class="col-md-6">
+                            <input class="form-control" name="description" type="text" id="description" value={{ dish.description }}>
+                        </div>
+                    </div>
+                     <div class="row">
+                    <div class="col-md-2">
+                        <h4>Price</h4>
+                    </div>
+                        <div class="col-md-6">
+                            <input class="form-control" name="price" type="number" id="price" value={{ dish.price }}>
+                        </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-md-2">
+                        <h4>Photo</h4>
+                    </div>
+                        <div class="col-md-6">
+                            <input class="form-control" name="photo" type="file" accept="image/*" value={{ dish.photo }} id="photo">
+                        </div>
+                    </div>
+                <button type="submit" class="btn btn-custom btn-lg">Ready</button>
+            </form>
+        </div>
+    </div>
+    {% else %}
+        <h1 align="center">You do not have access to this page</h1>
+    {% endif %}
+{% endblock %}

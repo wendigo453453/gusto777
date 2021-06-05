@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{%  block content %}
+    {% if 'manager' in user.groups.all.0.name or user.is_staff %}
+    <div class="container">
+        <div class="col-md-8 col-md-offset-2">
+            <form name="sendMessage" id="contactForm" novalidate action="" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-2">
+                        <h4>Назва</h4>
+                    </div>
+                    <div class="col-md-6">{{ form.title }}</div>
+                </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <h4>Category order</h4>
+                        </div>
+                        <div class="col-md-6">
+                            {{ form.category_order }}
+                        </div>
+                    </div>
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <h4>is visible</h4>
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.is_visible }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <h4>Is special</h4>
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.is_special }}
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-custom btn-lg">Create</button>
+            </form>
+        </div>
+    </div>
+    {% else %}
+        <h1 align="center">You do not have access to this page</h1>
+    {% endif %}
+{% endblock %}
